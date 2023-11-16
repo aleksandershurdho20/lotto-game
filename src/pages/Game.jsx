@@ -4,12 +4,16 @@ import { useAppContext } from "src/context/AppContext";
 const Game = () => {
     const { player, purchaseTicket } = useAppContext();
     const [guesses, setGuesses] = useState("");
+
+    const handleGuesses = ({ target: { value } }) => {
+        if (value.length > 5 || value < 0) return;
+        setGuesses(value);
+    };
     const handlePurchase = () => {
         purchaseTicket(guesses);
         setGuesses("");
     };
 
-    console.log(player, "player");
 
     return (
         <div className="container py-5 px-5">
@@ -20,9 +24,9 @@ const Game = () => {
                         <label className="label-title mb-2">
                             Enter your guesess
                             <input
-                                type="text"
+                                type="number"
                                 value={guesses}
-                                onChange={(e) => setGuesses(e.target.value)}
+                                onChange={handleGuesses}
                                 className="form-control bg-dark border-dark text-white mt-3"
                             />
                         </label>

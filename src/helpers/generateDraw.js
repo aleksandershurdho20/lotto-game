@@ -8,11 +8,11 @@ const PRICES = {
   
   export const handleDraw = (tickets, operatorBalance) => {
     const drawedNumbers = Array.from({ length: 5 }, () => Math.floor(Math.random() * 39) + 1);
-  
+    console.log(drawedNumbers,'drawedNumbers')
     const ticketData = tickets.map((ticket) => {
       const hits = ticket.guesses.filter((guess) => drawedNumbers.includes(guess)).length;
+
       const winnings = calculateWinnings(hits);
-  
       return {
         ...ticket,
         hits,
